@@ -4,6 +4,10 @@ A clean, minimal configuration for [YASB](https://github.com/amnweb/yasb) (Yet A
 
 ![Theme Preview](https://img.shields.io/badge/YASB-Minimal-blue?style=flat-square)
 
+## Preview
+
+![YASB Minimal Theme Preview](https://github.com/smarty-code/YASB-Minimal/blob/main/preview.png?raw=true)
+
 ## Features
 
 - **Minimal Design** - Clean, distraction-free status bar

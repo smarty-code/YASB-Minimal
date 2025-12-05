@@ -1,0 +1,216 @@
+watch_stylesheet: true
+watch_config: true
+debug: false
+
+bars:
+  primary-bar:
+    enabled: true
+    screens: ["*"]
+    class_name: "yasb-bar"
+    alignment:
+      position: "top"
+      center: false    
+    blur_effect:
+      enabled: true
+      dark_mode: true
+      round_corners: true
+      border_color: None
+    window_flags:
+      windows_app_bar: false
+    dimensions:
+      width: "100%"
+      height: 34
+    padding:
+      top: 5
+      left: 6
+      bottom: 2
+      right: 6
+
+    widgets:
+      left: ["win_button","cpu","memory",]
+      center: [ "clock"]
+      right: ["weather", "volume", "traffic", "bin"]
+
+widgets:
+
+  # --- Windows Button ---
+  win_button:
+    type: "yasb.custom.CustomWidget"
+    options:
+      label: "󰍲"        # Use your Windows icon here (no text)
+      label_alt: "󰍲"
+      class_name: "win-btn"
+      callbacks:
+        on_left: "exec start_menu"
+
+  cpu:
+    type: "yasb.cpu.CpuWidget"
+    options:
+      label: "<span>\uf4bc</span> {info[percent][total]}%"
+      label_alt: "<span>\uf4bc</span> {info[percent][total]}%"
+      update_interval: 2000
+      callbacks:
+        on_right: "exec cmd /c Taskmgr"
+      container_padding:
+        top: 0
+        left: 0
+        bottom: 0
+        right: 5
+  memory:
+    type: "yasb.memory.MemoryWidget"
+    options:
+      label: "<span>\uefc5</span> {virtual_mem_percent} %"
+      label_alt: "<span>\uefc5</span> {virtual_mem_used}/{virtual_mem_total}"
+      update_interval: 5000
+      callbacks:
+        on_left: "toggle_label"
+        on_middle: "do_nothing"
+        on_right: "do_nothing"
+      container_padding:
+        top: 0
+        left: 0
+        bottom: 0
+        right: 0  
+
+
+
+  clock:
+   type: "yasb.clock.ClockWidget"
+   options:
+     label: "\uf017 {%I:%M %p || %a, %d %b %y || Week %V }"
+     label_alt: "\uf017 {%I:%M %p || %a, %d %b %y }"
+     locale: ""
+     update_interval: 1000
+     timezones: ["Kolkata"]
+     icons:
+      clock_01 : "\udb85\udc3f"
+      clock_02 : "\udb85\udc40"
+      clock_03 : "\udb85\udc41"
+      clock_04 : "\udb85\udc42"
+      clock_05 : "\udb85\udc43"
+      clock_06 : "\udb85\udc44"
+      clock_07 : "\udb85\udc45"
+      clock_08 : "\udb85\udc46"
+      clock_09 : "\udb85\udc47"
+      clock_10 : "\udb85\udc48"
+      clock_11 : "\udb85\udc49"
+      clock_12 : "\udb85\udc4a"
+      clock_16 : "SNACK TIME !"
+      clock_21 : "Zzz..."
+      clock_22 : "Zzz..."
+      clock_23 : "Zzz..."
+     alarm_icons:
+      enabled: "\uf0f3"
+      disabled: "\uf0a2"
+      snooze: "\uf1f6"
+     calendar: 
+      blur: true
+      round_corners: true
+      round_corners_type: "normal"
+      border_color: "system"
+      alignment: "center"
+      direction: "down"
+      offset_top: 6
+      offset_left: 0
+      show_holidays: false
+      show_week_numbers: true
+      country_code: "IN"
+      holiday_color: "#FF6464"
+      extended: false
+     callbacks:
+      on_left: "toggle_calendar"
+      on_middle: "next_timezone"
+      on_right: "toggle_label"
+     container_padding:
+      top: 0
+      left: 0
+      bottom: 0
+      right: 0
+     label_shadow:
+      enabled: true
+      color: "black"
+      radius: 3
+      offset: [ 1, 1 ]
+
+
+  # --- Network Traffic Widget ---
+  traffic:
+    type: "yasb.traffic.TrafficWidget"
+    options:
+      label: "<span>\udb82\udcfa</span> \uea9a{download_speed} \ueaa1{upload_speed}"
+      label_alt: "<span>\udb82\udcfa</span> \uea9a{download_speed} \ueaa1{upload_speed}"
+      hide_if_offline: true
+      update_interval: 1000
+      speed_unit: 'bytes'
+      callbacks:
+        on_left: "toggle_label"
+
+  # --- Weather Widget ---
+  weather:
+    type: "yasb.weather.WeatherWidget"
+    options:
+      label: "<span>{icon}</span> {temp}°"
+      label_alt: "<span>{icon}</span> {location}: Min {min_temp}° Max {max_temp}° | Humidity {humidity}%"
+      api_key: "f06f46a4615344a2b41125000252806"
+      update_interval: 600
+      hide_decimal: true
+      location: "Kolkata, India"
+      callbacks:
+        on_left: "toggle_label"
+      icons:
+        sunnyDay: "󰖙"
+        clearNight: "󰖔"
+        cloudyDay: "󰖐"
+        cloudyNight: "󰼱"
+        rainyDay: "󰖗"
+        rainyNight: "󰖗"
+        snowyIcyDay: "󰖘"
+        snowyIcyNight: "󰖘"
+        blizzardDay: "󰼳"
+        default: "󰖙"
+
+  # --- Volume Widget ---
+  volume:
+    type: "yasb.volume.VolumeWidget"
+    options:
+      label: "<span>{icon}</span> {level}"
+      label_alt: "{volume}"
+      volume_icons:
+        - "󰖁"
+        - "󰕿"
+        - "󰖀"
+        - "󰕾"
+        - "󰕾"
+      callbacks:
+        on_right: "exec cmd.exe /c start ms-settings:sound"
+
+  
+
+  # --- Notifications Widget ---
+  notifications:
+    type: "yasb.notifications.NotificationsWidget"
+    options:
+      label: "<span>󰂚</span>"
+      label_alt: "{count} notifications"
+      hide_empty: true
+      tooltip: true
+      callbacks:
+        on_left: "toggle_notification"
+        on_middle: "toggle_label"
+
+
+  
+  # --- Recycle bin ---      
+  bin:
+   type: "yasb.recycle_bin.RecycleBinWidget"
+   options:
+     label: "<span>{icon}</span> {items_count} ({items_size})"
+     label_alt: "Items {items_count}, Total size ({items_size})"
+     icons:
+       bin_empty: "&#x267B;"
+       bin_filled: "&#x267B;"
+     callbacks:
+       on_left: "open_bin"
+       on_right: "toggle_label"
+       on_middle: "empty_bin"
+     

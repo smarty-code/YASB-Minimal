@@ -1,48 +1,66 @@
+# ============================================================================
+# YASB Configuration - Minimal Theme
+# ============================================================================
+
+# --- Global Settings ---
 watch_stylesheet: true
 watch_config: true
 debug: false
 
+# ============================================================================
+# BAR CONFIGURATION
+# ============================================================================
 bars:
   primary-bar:
     enabled: true
     screens: ["*"]
     class_name: "yasb-bar"
+    
     alignment:
       position: "top"
-      center: false    
+      center: false
+    
     blur_effect:
       enabled: true
       dark_mode: true
       round_corners: true
       border_color: None
+    
     window_flags:
       windows_app_bar: false
+    
     dimensions:
       width: "100%"
       height: 34
+    
     padding:
       top: 5
       left: 6
       bottom: 2
       right: 6
 
+    # Widget Layout
     widgets:
-      left: ["win_button","cpu","memory",]
-      center: [ "clock"]
+      left: ["win_button", "cpu", "memory"]
+      center: ["clock"]
       right: ["weather", "volume", "traffic", "bin"]
 
+# ============================================================================
+# WIDGET DEFINITIONS
+# ============================================================================
 widgets:
 
   # --- Windows Button ---
   win_button:
     type: "yasb.custom.CustomWidget"
     options:
-      label: "󰍲"        # Use your Windows icon here (no text)
+      label: "󰍲"
       label_alt: "󰍲"
       class_name: "win-btn"
       callbacks:
         on_left: "exec start_menu"
 
+  # --- CPU Monitor ---
   cpu:
     type: "yasb.cpu.CpuWidget"
     options:
@@ -56,6 +74,8 @@ widgets:
         left: 0
         bottom: 0
         right: 5
+
+  # --- Memory Monitor ---
   memory:
     type: "yasb.memory.MemoryWidget"
     options:
@@ -70,70 +90,75 @@ widgets:
         top: 0
         left: 0
         bottom: 0
-        right: 0  
+        right: 0
 
-
-
+  # --- Clock & Calendar ---
   clock:
-   type: "yasb.clock.ClockWidget"
-   options:
-     label: "\uf017 {%I:%M %p || %a, %d %b %y || Week %V }"
-     label_alt: "\uf017 {%I:%M %p || %a, %d %b %y }"
-     locale: ""
-     update_interval: 1000
-     timezones: ["Kolkata"]
-     icons:
-      clock_01 : "\udb85\udc3f"
-      clock_02 : "\udb85\udc40"
-      clock_03 : "\udb85\udc41"
-      clock_04 : "\udb85\udc42"
-      clock_05 : "\udb85\udc43"
-      clock_06 : "\udb85\udc44"
-      clock_07 : "\udb85\udc45"
-      clock_08 : "\udb85\udc46"
-      clock_09 : "\udb85\udc47"
-      clock_10 : "\udb85\udc48"
-      clock_11 : "\udb85\udc49"
-      clock_12 : "\udb85\udc4a"
-      clock_16 : "SNACK TIME !"
-      clock_21 : "Zzz..."
-      clock_22 : "Zzz..."
-      clock_23 : "Zzz..."
-     alarm_icons:
-      enabled: "\uf0f3"
-      disabled: "\uf0a2"
-      snooze: "\uf1f6"
-     calendar: 
-      blur: true
-      round_corners: true
-      round_corners_type: "normal"
-      border_color: "system"
-      alignment: "center"
-      direction: "down"
-      offset_top: 6
-      offset_left: 0
-      show_holidays: false
-      show_week_numbers: true
-      country_code: "IN"
-      holiday_color: "#FF6464"
-      extended: false
-     callbacks:
-      on_left: "toggle_calendar"
-      on_middle: "next_timezone"
-      on_right: "toggle_label"
-     container_padding:
-      top: 0
-      left: 0
-      bottom: 0
-      right: 0
-     label_shadow:
-      enabled: true
-      color: "black"
-      radius: 3
-      offset: [ 1, 1 ]
+    type: "yasb.clock.ClockWidget"
+    options:
+      label: "\uf017 {%I:%M %p || %a, %d %b %y || Week %V }"
+      label_alt: "\uf017 {%I:%M %p || %a, %d %b %y }"
+      locale: ""
+      update_interval: 1000
+      timezones: ["Kolkata"]
+      
+      # Hour-based icons
+      icons:
+        clock_01: "\udb85\udc3f"
+        clock_02: "\udb85\udc40"
+        clock_03: "\udb85\udc41"
+        clock_04: "\udb85\udc42"
+        clock_05: "\udb85\udc43"
+        clock_06: "\udb85\udc44"
+        clock_07: "\udb85\udc45"
+        clock_08: "\udb85\udc46"
+        clock_09: "\udb85\udc47"
+        clock_10: "\udb85\udc48"
+        clock_11: "\udb85\udc49"
+        clock_12: "\udb85\udc4a"
+        clock_16: "SNACK TIME !"
+        clock_21: "Zzz..."
+        clock_22: "Zzz..."
+        clock_23: "Zzz..."
+      
+      alarm_icons:
+        enabled: "\uf0f3"
+        disabled: "\uf0a2"
+        snooze: "\uf1f6"
+      
+      calendar:
+        blur: true
+        round_corners: true
+        round_corners_type: "normal"
+        border_color: "system"
+        alignment: "center"
+        direction: "down"
+        offset_top: 6
+        offset_left: 0
+        show_holidays: false
+        show_week_numbers: true
+        country_code: "IN"
+        holiday_color: "#FF6464"
+        extended: false
+      
+      callbacks:
+        on_left: "toggle_calendar"
+        on_middle: "next_timezone"
+        on_right: "toggle_label"
+      
+      container_padding:
+        top: 0
+        left: 0
+        bottom: 0
+        right: 0
+      
+      label_shadow:
+        enabled: true
+        color: "black"
+        radius: 3
+        offset: [1, 1]
 
-
-  # --- Network Traffic Widget ---
+  # --- Network Traffic ---
   traffic:
     type: "yasb.traffic.TrafficWidget"
     options:
@@ -145,7 +170,7 @@ widgets:
       callbacks:
         on_left: "toggle_label"
 
-  # --- Weather Widget ---
+  # --- Weather ---
   weather:
     type: "yasb.weather.WeatherWidget"
     options:
@@ -169,7 +194,7 @@ widgets:
         blizzardDay: "󰼳"
         default: "󰖙"
 
-  # --- Volume Widget ---
+  # --- Volume Control ---
   volume:
     type: "yasb.volume.VolumeWidget"
     options:
@@ -184,9 +209,7 @@ widgets:
       callbacks:
         on_right: "exec cmd.exe /c start ms-settings:sound"
 
-  
-
-  # --- Notifications Widget ---
+  # --- Notifications ---
   notifications:
     type: "yasb.notifications.NotificationsWidget"
     options:
@@ -198,19 +221,17 @@ widgets:
         on_left: "toggle_notification"
         on_middle: "toggle_label"
 
-
-  
-  # --- Recycle bin ---      
+  # --- Recycle Bin ---
   bin:
-   type: "yasb.recycle_bin.RecycleBinWidget"
-   options:
-     label: "<span>{icon}</span> {items_count} ({items_size})"
-     label_alt: "Items {items_count}, Total size ({items_size})"
-     icons:
-       bin_empty: "&#x267B;"
-       bin_filled: "&#x267B;"
-     callbacks:
-       on_left: "open_bin"
-       on_right: "toggle_label"
-       on_middle: "empty_bin"
+    type: "yasb.recycle_bin.RecycleBinWidget"
+    options:
+      label: "<span>{icon}</span> {items_count} ({items_size})"
+      label_alt: "Items {items_count}, Total size ({items_size})"
+      icons:
+        bin_empty: "&#x267B;"
+        bin_filled: "&#x267B;"
+      callbacks:
+        on_left: "open_bin"
+        on_right: "toggle_label"
+        on_middle: "empty_bin"
      

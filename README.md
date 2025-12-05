@@ -95,11 +95,18 @@ widgets:
   right: ["weather", "volume", "traffic", "bin"]
 ```
 
+## Author
+
+**Smarty Code** - [@smarty-code](https://github.com/smarty-code)
+
+Created with ❤️ for the Windows customization community.
+
 ## License
 
 MIT License - Feel free to modify and share.
 
 ## Credits
 
+- Theme designed by [Smarty Code](https://github.com/smarty-code)
 - [YASB](https://github.com/amnweb/yasb) by amnweb
 - [Catppuccin](https://github.com/catppuccin) color inspiration
